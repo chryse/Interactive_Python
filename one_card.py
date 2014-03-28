@@ -1,5 +1,6 @@
+## -*- coding: cp949 -*-
+## one card game
 
-ne card game
 import random
 
 class Card:
@@ -41,7 +42,7 @@ class Deck:
     def __str__(self):
         s = ""
         for i in range(len(self.cards)):
-            s = s + str(i+1) + ". " + str(self.cards[i]) + "\n"
+            s = s + str(i+1) + ". " + str(self.cards[i]) + "₩n"
         return s
 
     def shuffle(self):
@@ -67,8 +68,7 @@ class Deck:
     ## to deal card from the Deck into hands
     def deal(self, hands, num_cards=999):
         num_of_hands = len(hands)
-        num_cards = num_of_hands * 7    ## 7장씩 사람수 만큼 분배를 위해
-        for i in range(num_cards):
+        num_cards = num_of_hands * 7    ## 7�μ �щ���留���遺¦諛곕� �¦��        for i in range(num_cards):
             if self.is_empty(): break   ## break if out of cards
             card = self.popCard()       ## take the top card
             hand = hands[i % num_of_hands] ## whose turn is next?
@@ -84,9 +84,9 @@ class Hand(Deck):
     def __str__(self):
         s = "Hand " + self.name
         if self.is_empty():
-            s = s + " is empty\n"
+            s = s + " is empty₩n"
         else:
-            s = s + " contains\n"
+            s = s + " contains₩n"
         return s + Deck.__str__(self)
 
     ## to add cards from the hand
@@ -113,14 +113,14 @@ class OneCardGame(CardGame):
         self.deck.deal(self.hands)
         print "---------- Cards have been dealt"
         self.printHands()
-        ## Deck 의 제일 위카드
+        ## Deck ���黝肘 �¦移대�
         print "==================================================="
         self.upper_card = self.deck.cards.pop()
         print "A upper Card of Deck is ** %s **" %(self.upper_card)
         print "==================================================="
-        print "Start Game!!!\n"
+        print "Start Game!!!₩n"
 
-        ## 사람수의 턴으로 돌아가면서 카드를 upper_card 와 매칭 시킨다.
+        ## �щ��� �댁矧濡����¦媛¢硫댁¦�移대�瑜�upper_card �¢ 留ㅼ묶 �鬻\⑤��
         turn = 0
         numHands = len(self.hands)
         while 1:
@@ -136,7 +136,7 @@ class OneCardGame(CardGame):
     ## The return value is the number of matches made during this turn
     def play_One_Turn(self, player):
         if self.hands[player].is_empty():
-            print '\n####### ' + self.hands[player].name + ' wins! #######\n'
+            print '₩n####### ' + self.hands[player].name + ' wins! #######₩n'
             return 1
         self.match_card(player)
         return 0
@@ -144,25 +144,24 @@ class OneCardGame(CardGame):
     def match_card(self, player):
         num = 0
         tmp = {}
-        ## 매칭 되는 카드 검사
-        print "a selectable card\n===================="
+        ## 留ㅼ묶 ���移대� 寃¢��        print "a selectable card₩n===================="
         for i in self.hands[player].cards:
             up_suit = self.upper_card.suits[self.upper_card.suit]
             play_suit = i.suits[i.suit]
             up_rank = self.upper_card.ranks[self.upper_card.rank]
             play_rank = i.ranks[i.rank]
-            ## 모양과 숫자가 같은 카드를 보여 준다.
+            ## 紐⑥�怨��レ�媛¢ 媛� 移대�瑜�蹂댁 以¢��
             if (up_suit == play_suit or up_rank == play_rank):
                 print '[%s] %s' % (str(num+1), str(i))
                 tmp[num] = i
                 num = num +1
         print "===================="
-        ## 버릴 수 있는 카드가 없다면 Deck에서 한장의 카드를 먹는다.
+        ## 踰¦由�������移대�媛¢ ���ㅻ㈃ Deck�¦��黝媓��移대�瑜�癒밸���
         if (num == 0):
             print 'No card to drop, you should take a card.'
             pickedcard = self.deck.cards.pop()
             self.hands[player].add(pickedcard)
-        ## 랜덤함수로 카드를 선택해 버린다.
+        ## �蕤�ㅽ�� 移대�瑜��퓩‾炮 踰¦由곕��
         else :
             tmp_key = tmp.keys()
             tmp_choice = random.choice(tmp_key)
@@ -178,10 +177,10 @@ class OneCardGame(CardGame):
         for hand in self.hands:
             print hand
             
-    ## 현재 player의 손에 있는 카드를 보여 준다.
+    ## �¦��player���� ����移대�瑜�蹂댁 以¢��
     def print_player_card(self, player):
         player_card_num = 1
-        print '\nA card on the top - ', self.upper_card
+        print '₩nA card on the top - ', self.upper_card
         print 'Cards of [%s]' % (str(self.hands[player].name))
         for hand in self.hands[player].cards:
             print '%s. %s' %(str(player_card_num), str(hand))
