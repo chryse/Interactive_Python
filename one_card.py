@@ -190,5 +190,5 @@ class OneCardGame(CardGame):
 
 
 onecard = OneCardGame()
-onecard.play(['Kim', 'Lee', 'Park', 'Dylan Choi'])
+onecard.play(['Jun Kim', 'Lee', 'Park', 'Dylan Choi'])
 
