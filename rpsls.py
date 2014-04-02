@@ -88,6 +88,8 @@ rpsls("lizard")
 rpsls("scissors")
 
 rpsls("roook")
+user_selection = raw_input("Type your choice!")
+rpsls(user_selection)
 
 # always remember to check your completed program against the grading rubric
 
