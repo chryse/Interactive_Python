@@ -46,7 +46,6 @@ class Deck:
         return s
 
     def shuffle(self):
-#        import random
         num_cards = len(self.cards)
         for i in range(num_cards):
             j = random.randrange(i, num_cards)
