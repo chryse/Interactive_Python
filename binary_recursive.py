@@ -2,7 +2,7 @@ import random
 
 range_num = 100
 list_num = []
-for i in range(0, 101):
+for i in range(0, range_num+1):
     list_num.append(i)
     
 secret_num = random.randint(0, 100)
