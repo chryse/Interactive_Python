@@ -1,17 +1,32 @@
-# The key idea of this program is to equate the strings
-# "rock", "paper", "scissors", "lizard", "Spock" to numbers
-# as follows:
-#
 # 0 - rock
 # 1 - Spock
 # 2 - paper
 # 3 - lizard
 # 4 - scissors
 
-# helper functions
-
+import simplegui
 import random
 
+#global variables
+width = 300
+height = 300
+position_user_title = [10, 50]
+position_comp_title = [10, 150]
+position_user = [30, 80]
+position_comp = [30, 180]
+position_result = [5, 250]
+
+font_size = 30
+user_font_color = "#FF0000"
+comp_font_color = "#0000FF"
+result_font_color = "#00FF00"
+user_choice = ""
+comp_choice = ""
+result = ""
+
+
+
+# helper functions   
 def name_to_number(name):
     # convert name to number using if/elif/else
     if (name == "rock" or name == "Rock") :
@@ -45,8 +60,9 @@ def number_to_name(number):
     return name
     
 
-def rpsls(player_choice):     
-    # print a blank line to separate consecutive games
+def rpsls(player_choice):
+    global comp_choice
+    
     print ""
 
     # print out the message for the player's choice
@@ -71,26 +87,66 @@ def rpsls(player_choice):
     if (player_number != 5) :
         
         if result_number == 1 or result_number == 2 :
-            print "Player wins!"
+            #print "Player wins!"
+            return "Player wins!"
         elif result_number == 3 or result_number == 4 :
-            print "Computer wins!"
+            #print "Computer wins!"
+            return "Computer wins!"
         elif result_number == 0 :
-            print "Player and computer tie!"
+            #print "Player and computer tie!"
+            return "Player and computer tie!"
     else :
-        print "Please type a right choice!"
+        #print "Please type a right choice!"
+        return "Please type a right choice!"
 
+# define event handlers
+def rock():
+    global user_choice, result
+    user_choice = "rock"
+    result = rpsls(user_choice)
     
-# test your code - LEAVE THESE CALLS IN YOUR SUBMITTED CODE
-rpsls("rock")
-rpsls("Spock")
-rpsls("paper")
-rpsls("lizard")
-rpsls("scissors")
+def paper():
+    global user_choice, result
+    user_choice = "paper"
+    result = rpsls(user_choice)
+    
+def scissors():
+    global user_choice, result
+    user_choice = "scissors"
+    result = rpsls(user_choice)
 
-rpsls("roook")
-user_selection = raw_input("Type your choice!")
-rpsls(user_selection)
+def lizard():
+    global user_choice, result
+    user_choice = "lizard"
+    result = rpsls(user_choice)
 
-# always remember to check your completed program against the grading rubric
+def spock():
+    global user_choice, result
+    user_choice = "Spock"
+    result = rpsls(user_choice)
+    
+    
+def draw(canvas):
+    canvas.draw_text("User choice:", position_user_title, font_size, user_font_color)
+    canvas.draw_text("Computer choice:", position_comp_title, font_size, comp_font_color)
+    canvas.draw_text(user_choice, position_user, font_size, user_font_color)
+    canvas.draw_text(comp_choice, position_comp, font_size, comp_font_color)
+    canvas.draw_text(result, position_result, font_size, result_font_color)
+    
+        
+        
+# create a frame
+frame = simplegui.create_frame("Rock-Paper-Scissors-Lizard-Spock", width, height)
 
+frame.set_canvas_background("White")
+frame.add_button("Rock", rock, 100)
+frame.add_button("Paper", paper, 100)
+frame.add_button("Scissors", scissors, 100)
+frame.add_button("Lizard", lizard, 100)
+frame.add_button("Spock", spock, 100)
 
+# register handlers
+frame.set_draw_handler(draw)
+
+# start frame
+frame.start()
