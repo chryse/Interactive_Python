@@ -14,8 +14,8 @@ OUTCOME_FONT_SIZE = DEALER_FONT_SIZE = PLAYER_FONT_SIZE = 20
 OUTCOME_FONT_COLOR = "15CDE3"
 DEALER_FONT_COLOR = PLAYER_FONT_COLOR = "#FFFFFF"
 OUTCOME_FONT_FACE = DEALER_FONT_FACE = PLAYER_FONT_FACE = "monospace"
-MONEY_POS = [WIDTH * 7/9, HEIGHT * 1/7]
-BET_POS = [WIDTH * 7/9 + 14, HEIGHT * 1/7 + 30]
+MONEY_POS = [PLAYER_FONT_POS[0] + 150, PLAYER_FONT_POS[1]]
+BET_POS = [MONEY_POS[0] + 150, PLAYER_FONT_POS[1]]
 MONEY_FONT_SIZE = BET_FONT_SIZE = 18
 MONEY_FONT_COLOR = BET_FONT_COLOR = "#CCD71A"
 MONEY_FONT_FACE = BET_FONT_FACE = "sans-serif"
@@ -165,7 +165,7 @@ def deal():
             dealer_value = ""
             bet_amount = 10
             bet_input.set_text("$" + str(bet_amount))
-    
+   
 
 def hit():
     global outcome, in_play, is_bet, money, player_value
@@ -258,8 +258,9 @@ def stand():
                     outcome = "You won. You gained $" + str(bet_amount) + ". New deal?"
                     dealer_value = str(dealer_hand.get_value())
                     dealer_win = False
-
+                        
         # count bet amount
+        print "Dealer win?", dealer_win
         if dealer_win: money -= bet_amount
         else: money += bet_amount
                 
@@ -281,8 +282,8 @@ def new():
     outcome = "Hit or stand?"
     player_value = str(player_hand.get_value())
     dealer_value = ""
-    bet_input.set_text("$10")
     bet_amount = 10
+    bet_input.set_text("$" + str(bet_amount)) 
     money = 300
             
 # bet amount input handler            
