@@ -190,4 +190,7 @@ class OneCardGame(CardGame):
 
 onecard = OneCardGame()
 onecard.play(['Jun Kim', 'Lee', 'Park', 'Dylan Choi'])
+#c1 = Card(0, 1)
+#c2 = Card(1, 1)
+#print cmp(c1, c2)
 
